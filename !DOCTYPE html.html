@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fecfef, #ffecd2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        h1 {
+            color: #e91e63;
+            font-size: 3em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        button {
+            font-family: inherit;
+            font-size: 1.5em;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        #yes {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+        }
+        #yes:hover {
+            transform: scale(1.1);
+        }
+        #no {
+            background: linear-gradient(45deg, #a8e6cf, #dcedc8);
+            color: #333;
+            position: absolute;
+        }
+        #no:hover {
+            transform: scale(1.05);
+        }
+        .heart {
+            position: absolute;
+            font-size: 2em;
+            color: #ff6b6b;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Will you be my Valentine? 💖</h1>
+        <div class="buttons">
+            <button id="yes">Yes! 😍</button>
+            <button id="no">No 😢</button>
+        </div>
+    </div>
+    <!-- Floating hearts for cuteness -->
+    <div class="heart" style="top: 10%; left: 10%;">❤️</div>
+    <div class="heart" style="top: 20%; right: 15%;">💕</div>
+    <div class="heart" style="bottom: 15%; left: 20%;">💖</div>
+    <div class="heart" style="bottom: 10%; right: 10%;">💗</div>
+
+    <script>
+        const noButton = document.getElementById('no');
+        const yesButton = document.getElementById('yes');
+
+        // Function to move the No button to a random position
+        function moveNoButton() {
+            const container = document.querySelector('.container');
+            const containerRect = container.getBoundingClientRect();
+            const buttonRect = noButton.getBoundingClientRect();
+
+            // Calculate random position within the container, ensuring the button stays inside
+            const maxX = containerRect.width - buttonRect.width;
+            const maxY = containerRect.height - buttonRect.height;
+
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+
+            noButton.style.left = randomX + 'px';
+            noButton.style.top = randomY + 'px';
+        }
+
+        // Move the No button on mouseover (when trying to click)
+        noButton.addEventListener('mouseover', moveNoButton);
+
+        // Also move on mousedown to make it extra tricky
+        noButton.addEventListener('mousedown', moveNoButton);
+
+        // Handle Yes button click
+        yesButton.addEventListener('click', () => {
+            alert('Yay! You said yes! 💕 Happy Valentine\'s Day!');
+        });
+    </script>
+</body>
+</html>
